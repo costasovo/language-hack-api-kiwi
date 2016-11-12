@@ -3,6 +3,7 @@ service: serverless-graphql
 provider:
   name: aws
   runtime: nodejs4.3
+  region: eu-west-1
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -16,17 +17,18 @@ functions:
     - http:
         path: graphql
         method: post
+        integration: lambda
         cors: true
         response:
           headers:
-            Access-Control-Allow-Origin: "*"
+            Access-Control-Allow-Origin: "'*'"
 
 resources:
   Resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: <your-s3-bucket-name>
+        BucketName: kiwibot-v1
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html

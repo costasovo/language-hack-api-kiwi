@@ -17,6 +17,8 @@ import Dashboard from './containers/Dashboard';
 import {
   setRelayNetworkLayer,
 } from './utils';
+import GraphiQL from 'graphiql';
+import fetch from 'isomorphic-fetch';
 
 setRelayNetworkLayer();
 
@@ -40,22 +42,15 @@ function renderAppRoute({ done, props, element }) {
   return <AppLoading />;
 }
 
+function graphQLFetcher(graphQLParams) {
+  return fetch('/graphql', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(graphQLParams),
+  }).then(response => response.json());
+}
+
 ReactDOM.render(
-  <Router
-    history={browserHistory}
-    render={applyRouterMiddleware(useRelay.default)}
-    environment={Relay.Store}
-  >
-    <Route
-      path="/"
-      component={App}
-      render={renderAppRoute}
-    >
-      <IndexRoute
-        component={Dashboard}
-        queries={DashboardQueries}
-      />
-    </Route>
-  </Router>,
+  <GraphiQL fetcher={graphQLFetcher} />,
   document.getElementById('root')
 );
