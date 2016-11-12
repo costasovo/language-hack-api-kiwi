@@ -9,9 +9,11 @@ export default (code) => {
 				body = JSON.parse(body);
 				if (body.response[0].name) {
 					resolve(body.response[0].name);
+				} else {
+					resolve(code);
 				}
 			} else {
-				resolve(null);
+				resolve(code);
 			}
 		});
 	});

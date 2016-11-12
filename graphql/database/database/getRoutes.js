@@ -14,7 +14,7 @@ export default (_params) => {
 				let arrivalDate = moment.unix(item.aTime);
 				let departureDate = moment.unix(item.dTime);
 				let route = {
-					price: '$' + item.price,
+					price: '€' + item.price,
 					id: item.id,
 					origin: item.flyFrom,
 					destination: item.flyTo,
@@ -22,9 +22,9 @@ export default (_params) => {
 					airlineCodes: item.route.map((route) => route.airline),
 					airportCodes: item.route.map((route) => route.flyTo),
 					departureDate: departureDate.format('MM/DD'),
-					departureTime: departureDate.format('HH:mm a'),
+					departureTime: departureDate.format('HH:mma'),
 					arrivalDate: arrivalDate.format('MM/DD'),
-					arrivalTime: arrivalDate.format('HH:mm a'),
+					arrivalTime: arrivalDate.format('HH:mma'),
 					token: item.booking_token,
 				};
 				return route;
