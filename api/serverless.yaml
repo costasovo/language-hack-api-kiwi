@@ -1,4 +1,4 @@
-service: serverless-graphql
+service: kiwi-graphql
 
 provider:
   name: aws
@@ -30,7 +30,7 @@ resources:
     WebsiteS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: kiwibot-v1
+        BucketName: kiwi-gql-v1
         AccessControl: PublicRead
         WebsiteConfiguration:
           IndexDocument: index.html
